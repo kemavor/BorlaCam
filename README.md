@@ -9,18 +9,18 @@
 
 ![BorlaCam Demo](https://via.placeholder.com/800x400/2563eb/ffffff?text=BorlaCam+Demo)
 
-## 🎯 Features
+## Features
 
-- **🎥 Real-time Detection**: 5-second scanning intervals with live webcam feed
-- **🧠 High Precision AI**: 95% recyclable precision, 92% organic precision
-- **🔊 Audio Feedback**: Clear voice announcements for accessibility
-- **📊 Statistics & Analytics**: Real-time detection history and performance metrics
-- **🐳 Docker Ready**: One-click deployment with Docker containers
-- **🔄 Scalable**: Built for horizontal scaling and load balancing
-- **🏥 Health Monitoring**: Built-in health checks and performance monitoring
-- **📱 Responsive UI**: Modern React frontend with real-time updates
+- **Real-time Detection**: 5-second scanning intervals with live webcam feed
+- **High Precision AI**: 95% recyclable precision, 92% organic precision
+- **Audio Feedback**: Clear voice announcements for accessibility
+- **Statistics & Analytics**: Real-time detection history and performance metrics
+- **Docker Ready**: One-click deployment with Docker containers
+- **Scalable**: Built for horizontal scaling and load balancing
+- **Health Monitoring**: Built-in health checks and performance monitoring
+- **Responsive UI**: Modern React frontend with real-time updates
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -40,9 +40,9 @@ cd BorlaCam
 python deploy.py production true true
 ```
 
-That's it! BorlaCam will be running at `http://localhost:8000` 🎉
+That's it! BorlaCam will be running at `http://localhost:8000`
 
-## 📋 API Usage
+## API Usage
 
 ### Prediction Endpoint
 
@@ -79,7 +79,7 @@ Content-Type: application/json
 GET http://localhost:8000/health
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -93,7 +93,7 @@ GET http://localhost:8000/health
                         └──────────────────┘
 ```
 
-## 🧠 Model Performance
+## Model Performance
 
 | Metric | Before Training | After Precision Training |
 |--------|----------------|--------------------------|
@@ -108,7 +108,7 @@ GET http://localhost:8000/health
 - **Training Time**: 200-300 epochs with precision-focused loss weighting
 - **Hardware**: NVIDIA MX450 GPU acceleration
 
-## 🛠️ Development
+## Development
 
 ### Local Development Setup
 
@@ -148,7 +148,7 @@ cp training_runs/your_model/weights/best.pt models/
 docker-compose restart borlacam-api
 ```
 
-## 🐳 Deployment
+## Deployment
 
 ### Docker Deployment (Recommended)
 
@@ -175,7 +175,7 @@ cd front
 npm install && npm run build
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 ### Built-in Monitoring
 
@@ -197,7 +197,7 @@ python monitoring.py --once
 - Model inference performance
 - Detection accuracy and confidence levels
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -217,7 +217,7 @@ GPU_ENABLED=true
 - **Input Size**: 640×640 pixels
 - **Inference Time**: ~32ms average
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -240,7 +240,7 @@ ls -la models/best.pt
 # wget https://github.com/yourusername/borlacam/releases/download/v1.0/best.pt
 ```
 
-## 📈 Performance Benchmarks
+## Performance Benchmarks
 
 | Hardware | Inference Time | FPS | Memory Usage |
 |----------|---------------|-----|--------------|
@@ -248,7 +248,7 @@ ls -la models/best.pt
 | CPU Only | 156ms | 6.4 | 800MB |
 | NVIDIA RTX 3080 | 12ms | 83.3 | 1.8GB |
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -264,24 +264,24 @@ ls -la models/best.pt
 - Update documentation
 - Test deployment before submitting PR
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) for the base model
 - [React](https://reactjs.org/) for the frontend framework
 - [Flask](https://flask.palletsprojects.com/) for the API framework
 - OpenCV for image processing
 
-## 📞 Support & Contact
+## Support & Contact
 
 - **Issues**: [GitHub Issues](https://github.com/7044Inc/BorlaCam/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/7044Inc/BorlaCam/discussions)
 - **Email**: your.email@example.com
 
-## 🎯 Roadmap
+## Roadmap
 
 - [ ] Multi-language support
 - [ ] Mobile app development
@@ -292,7 +292,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for a cleaner planet** 🌍
+**Built with care for a cleaner planet**
 
 [![GitHub stars](https://img.shields.io/github/stars/7044Inc/BorlaCam.svg?style=social&label=Star)](https://github.com/7044Inc/BorlaCam)
 [![GitHub forks](https://img.shields.io/github/forks/7044Inc/BorlaCam.svg?style=social&label=Fork)](https://github.com/7044Inc/BorlaCam/fork)
