@@ -1,0 +1,138 @@
+name: Feature Request
+description: Suggest a new feature for BorlaCam
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide details about your idea below.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief summary of the feature you'd like to see
+      placeholder: Summarize your feature request in 1-2 sentences
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem/Use Case
+      description: What problem does this feature solve? What's the use case?
+      placeholder: |
+        Is your feature request related to a problem? Please describe:
+        - What problem are you trying to solve?
+        - Who would benefit from this feature?
+        - How would this improve the user experience?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like to see
+      placeholder: |
+        Describe your proposed solution:
+        - How should this feature work?
+        - What would the user interface look like?
+        - What would the API look like?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of BorlaCam would this feature affect?
+      options:
+        - API/Backend
+        - Frontend/React
+        - Model/AI
+        - Docker/Deployment
+        - Documentation
+        - Multiple components
+        - New component
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would be helpful
+        - High - Important for my use case
+        - Critical - Blocking my usage
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered
+      placeholder: |
+        Have you considered any alternatives?
+        - Other approaches to solve the same problem
+        - Existing solutions or workarounds
+        - Different implementation approaches
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Ideas
+      description: If you have ideas about how to implement this, please share them
+      placeholder: |
+        Any thoughts on implementation:
+        - Technical approach
+        - Libraries or tools that might be useful
+        - Potential challenges
+        - Are you willing to contribute to the implementation?
+    validations:
+      required: false
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups/Examples
+      description: If applicable, provide mockups, screenshots, or examples
+      placeholder: |
+        Visual examples (if applicable):
+        - Screenshots from other applications
+        - Mockups or wireframes
+        - API examples
+        - Configuration examples
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Are you interested in contributing to this feature?
+      options:
+        - label: I'm willing to contribute to the implementation of this feature
+          required: false
+        - label: I can help with testing once implemented
+          required: false
+        - label: I can help with documentation
+          required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, links, or information about the feature request
+      placeholder: Any additional information that might be helpful...
+    validations:
+      required: false
