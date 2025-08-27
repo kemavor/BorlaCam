@@ -2,6 +2,7 @@
 .git
 .github
 *.md
+README.md
 .gitignore
 .dockerignore
 

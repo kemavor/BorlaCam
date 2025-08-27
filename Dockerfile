@@ -19,22 +19,20 @@ RUN apt-get update && apt-get install -y \
 COPY requirements_production.txt .
 RUN pip install --no-cache-dir -r requirements_production.txt
 
-# Copy application code
+# Copy essential application files
 COPY production_api.py .
 COPY healthcheck.py .
-COPY custom_waste_knowledge.json* ./
 
-# Copy frontend build (if it exists)
-COPY front/dist/ ./static/ 2>/dev/null || mkdir -p static
+# Create necessary directories
+RUN mkdir -p models logs static
 
-# Create models directory
-RUN mkdir -p models logs
+# Copy everything and clean up what we don't need
+COPY . .
+RUN find . -name "*.pyc" -delete && \
+    find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
 
 # Download YOLOv8 base model (will be used if no custom model is provided)
-RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')" || true
-
-# Copy any existing model files (optional)
-COPY models/*.pt ./models/ 2>/dev/null || true
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')" || echo "Base model download failed"
 
 # Set environment variables
 ENV FLASK_ENV=production
