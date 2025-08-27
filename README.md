@@ -33,8 +33,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/borlacam.git
-cd borlacam
+git clone https://github.com/7044Inc/BorlaCam.git
+cd BorlaCam
 
 # Deploy to production
 python deploy.py production true true
@@ -114,8 +114,8 @@ GET http://localhost:8000/health
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/borlacam.git
-cd borlacam
+git clone https://github.com/7044Inc/BorlaCam.git
+cd BorlaCam
 
 # Create virtual environment
 python -m venv venv
@@ -277,8 +277,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support & Contact
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/borlacam/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/borlacam/discussions)
+- **Issues**: [GitHub Issues](https://github.com/7044Inc/BorlaCam/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/7044Inc/BorlaCam/discussions)
 - **Email**: your.email@example.com
 
 ## 🎯 Roadmap
@@ -294,5 +294,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ for a cleaner planet** 🌍
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/borlacam.svg?style=social&label=Star)](https://github.com/yourusername/borlacam)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/borlacam.svg?style=social&label=Fork)](https://github.com/yourusername/borlacam/fork)
+[![GitHub stars](https://img.shields.io/github/stars/7044Inc/BorlaCam.svg?style=social&label=Star)](https://github.com/7044Inc/BorlaCam)
+[![GitHub forks](https://img.shields.io/github/forks/7044Inc/BorlaCam.svg?style=social&label=Fork)](https://github.com/7044Inc/BorlaCam/fork)
