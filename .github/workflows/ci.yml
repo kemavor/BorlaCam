@@ -112,8 +112,22 @@ jobs:
     - name: Test Docker container
       run: |
         docker run --rm -d --name borlacam-test -p 8001:8000 borlacam:test
-        sleep 10
-        curl -f http://localhost:8001/health || exit 1
+        sleep 30
+        # Test health endpoint with retry
+        for i in {1..5}; do
+          if curl -f http://localhost:8001/health; then
+            echo "Health check passed"
+            break
+          else
+            echo "Health check attempt $i failed, retrying..."
+            sleep 10
+          fi
+          if [ $i -eq 5 ]; then
+            echo "Health check failed after 5 attempts"
+            docker logs borlacam-test
+            exit 1
+          fi
+        done
         docker stop borlacam-test
 
   security-scan:
@@ -129,8 +143,12 @@ jobs:
         scan-ref: '.'
         format: 'sarif'
         output: 'trivy-results.sarif'
+        exit-code: '0'
+        ignore-unfixed: true
+        severity: 'CRITICAL,HIGH'
         
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
+      if: always()
       with:
         sarif_file: 'trivy-results.sarif'

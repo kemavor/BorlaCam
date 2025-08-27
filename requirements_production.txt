@@ -17,6 +17,7 @@ Pillow>=9.5.0
 # Production utilities
 gunicorn==21.2.0
 python-dotenv==1.0.0
+requests>=2.28.0
 
 # Monitoring (optional)
 psutil==5.9.5

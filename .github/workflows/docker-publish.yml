@@ -51,6 +51,13 @@ jobs:
           type=semver,pattern={{major}}
           type=sha,prefix={{branch}}-
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: front/package-lock.json
+        
     - name: Build frontend for production
       run: |
         cd front

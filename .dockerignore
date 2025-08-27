@@ -1,0 +1,96 @@
+# Development files
+.git
+.github
+*.md
+.gitignore
+.dockerignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+cuda_env/
+*.egg-info/
+
+# Training data and models (too large)
+datasets/
+training_runs/
+waste_training/
+precision_training/
+training_runs_optimized/
+quick_threshold_optimization/
+test_results_*/
+model_graphs/
+
+# Development scripts
+debug_model.py
+examine_dataset.py
+reorganize_dataset.py
+create_training_dataset.py
+integrate_frontend.py
+setup_frontend_simple.py
+borlacam_react_api.py
+validate_model.py
+quick_validate.py
+optimize_confidence_thresholds.py
+simple_precision_test.py
+flawless_detection.py
+custom_labeling_system.py
+enhanced_api_with_custom_labels.py
+enhanced_api_with_custom_labels_fixed.py
+generate_model_graphs.py
+enhanced_model_graphs.py
+simple_model_graphs.py
+fix_opencv.py
+train_*.py
+
+# Batch files
+*.bat
+deploy.sh
+
+# Config files with sensitive data
+precision_deployment_config.json
+.env*
+!.env.production.template
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+nul
+
+# Images and videos
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tiff
+*.webp
+*.mp4
+*.avi
+
+# Frontend source (build is copied separately)
+front/src/
+front/node_modules/
+front/package*.json
+front/eslint.config.js
+front/vite.config.js
+front/public/
+front/README.md
+
+# Cache files
+*.cache
+.cache/
+
+# Test files
+tests/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

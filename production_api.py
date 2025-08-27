@@ -49,15 +49,17 @@ class BorlaCamAPI:
     def load_model(self):
         """Load the best available trained model"""
         model_paths = [
+            'models/best.pt',
             'training_runs/borlacam_optimized/weights/best.pt',
             'waste_training/mx450_waste_model/weights/best.pt',
             'precision_training/precision_focused/weights/best.pt',
         ]
         
+        # Try to load custom trained models first
         for model_path in model_paths:
             if Path(model_path).exists():
                 try:
-                    logger.info(f"Loading model from {model_path}")
+                    logger.info(f"Loading custom model from {model_path}")
                     self.model = YOLO(model_path)
                     
                     # Configure for production
@@ -75,19 +77,49 @@ class BorlaCamAPI:
                         'path': model_path,
                         'classes': list(self.model.names.values()),
                         'device': str(self.model.device),
-                        'gpu_available': torch.cuda.is_available()
+                        'gpu_available': torch.cuda.is_available(),
+                        'model_type': 'custom'
                     }
                     
                     self.model_loaded = True
-                    logger.info(f"Model ready: {self.model_info['classes']}")
+                    logger.info(f"Custom model ready: {self.model_info['classes']}")
                     return
                     
                 except Exception as e:
                     logger.error(f"Failed to load {model_path}: {e}")
                     continue
         
-        if not self.model_loaded:
-            raise RuntimeError("No model could be loaded for production")
+        # Fallback to base YOLOv8 model for demo purposes
+        try:
+            logger.warning("No custom model found, falling back to base YOLOv8n")
+            self.model = YOLO('yolov8n.pt')
+            
+            if torch.cuda.is_available():
+                self.model.to('cuda')
+                logger.info(f"Base model loaded on GPU: {torch.cuda.get_device_name(0)}")
+            else:
+                logger.info("Base model loaded on CPU")
+            
+            # Warmup inference
+            dummy_img = np.zeros((640, 640, 3), dtype=np.uint8)
+            _ = self.model(dummy_img, verbose=False)
+            
+            self.model_info = {
+                'path': 'yolov8n.pt (base model)',
+                'classes': list(self.model.names.values()),
+                'device': str(self.model.device),
+                'gpu_available': torch.cuda.is_available(),
+                'model_type': 'base',
+                'warning': 'Using base YOLO model - upload custom model for waste detection'
+            }
+            
+            self.model_loaded = True
+            logger.info(f"Base model ready with classes: {self.model_info['classes']}")
+            return
+            
+        except Exception as e:
+            logger.error(f"Failed to load base model: {e}")
+            raise RuntimeError(f"No model could be loaded for production: {e}")
     
     def predict(self, image, confidence=0.25):
         """Run inference on image"""

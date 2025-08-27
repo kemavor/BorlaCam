@@ -21,15 +21,20 @@ RUN pip install --no-cache-dir -r requirements_production.txt
 
 # Copy application code
 COPY production_api.py .
+COPY healthcheck.py .
 COPY custom_waste_knowledge.json* ./
 
-# Copy the best available model
-COPY training_runs/borlacam_optimized/weights/best.pt* ./models/ 2>/dev/null || \
-COPY waste_training/mx450_waste_model/weights/best.pt* ./models/ 2>/dev/null || \
-COPY precision_training/precision_focused/weights/best.pt* ./models/ 2>/dev/null || true
+# Copy frontend build (if it exists)
+COPY front/dist/ ./static/ 2>/dev/null || mkdir -p static
 
-# Create models directory if it doesn't exist
+# Create models directory
 RUN mkdir -p models logs
+
+# Download YOLOv8 base model (will be used if no custom model is provided)
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')" || true
+
+# Copy any existing model files (optional)
+COPY models/*.pt ./models/ 2>/dev/null || true
 
 # Set environment variables
 ENV FLASK_ENV=production
@@ -38,7 +43,7 @@ ENV PORT=8000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD python healthcheck.py
 
 # Expose port
 EXPOSE 8000
