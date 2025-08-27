@@ -1,0 +1,161 @@
+# BorlaCam .gitignore
+# ====================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+cuda_env/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Model files (too large for Git)
+*.pt
+*.pth
+*.onnx
+*.weights
+models/
+training_runs/
+waste_training/
+precision_training/
+training_runs_optimized/
+quick_threshold_optimization/
+
+# Dataset files (too large for Git)
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tiff
+*.webp
+
+# Training results
+test_results_*/
+model_graphs/
+*.csv
+
+# Temporary files
+*.tmp
+*.temp
+nul
+
+# Cache files
+*.cache
+.cache/
+
+# Frontend
+front/node_modules/
+front/dist/
+front/.eslintcache
+front/coverage/
+
+# Development files (keep in separate branch if needed)
+*_screenshot_*.jpg
+test_detection_image.jpg
+borlacam_screenshot_*.jpg
+
+# Documentation drafts (keep final versions)
+CUSTOM_LABELING_GUIDE.md
+DETECTION_TROUBLESHOOTING.md
+FRONTEND_INTEGRATION_GUIDE.md
+QUICK_TROUBLESHOOTING.md
+REACT_DEV_GUIDE.md
+SIMPLE_TRAINING_COMMAND.txt
+TRAINING_INSTRUCTIONS.md
+
+# Development scripts (keep in dev branch if needed)
+create_training_dataset.py
+debug_model.py
+examine_dataset.py
+reorganize_dataset.py
+reorganize_or_dataset.py
+integrate_frontend.py
+setup_frontend_simple.py
+borlacam_react_api.py
+validate_model.py
+quick_validate.py
+optimize_confidence_thresholds.py
+simple_precision_test.py
+flawless_detection.py
+custom_labeling_system.py
+enhanced_api_with_custom_labels.py
+enhanced_api_with_custom_labels_fixed.py
+generate_model_graphs.py
+enhanced_model_graphs.py
+simple_model_graphs.py
+fix_opencv.py
+train_manual_fixed.py
+train_optimized_yolo.py
+train_working.py
+
+# Keep only essential training script
+# train_precision_focused.py - KEEP THIS
+
+# Batch files
+launch.bat
+run_training.bat
+
+# Config files that might contain sensitive data
+precision_deployment_config.json
+custom_waste_knowledge.json
+
+# Performance reports (generated)
+model_performance_report.json
+deployment_cleanup_summary.json
+
+# Docker volumes
+docker-data/
+
+# Backup files
+*.bak
+*.backup

@@ -1,0 +1,22 @@
+# BorlaCam Production Dependencies
+# Core framework
+Flask==2.3.3
+flask-cors==4.0.0
+waitress==2.1.2
+
+# AI/ML
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0
+
+# Image processing
+opencv-python-headless==4.8.1.78
+numpy>=1.24.0
+Pillow>=9.5.0
+
+# Production utilities
+gunicorn==21.2.0
+python-dotenv==1.0.0
+
+# Monitoring (optional)
+psutil==5.9.5

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Enhanced API Connection</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: white; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #22c55e; }
+        .error { background: #ef4444; }
+        .info { background: #3b82f6; }
+        pre { background: #2d2d2d; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        button { background: #3b82f6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Enhanced API Connection Test</h1>
+        <p>This test page checks if your React app can connect to the Enhanced API.</p>
+        
+        <button onclick="testConnection()">Test API Connection</button>
+        <button onclick="testDetection()">Test Detection</button>
+        <button onclick="getCustomLabels()">Get Custom Labels</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+        
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = message;
+            resultsDiv.appendChild(div);
+        }
+        
+        function logPre(data) {
+            const pre = document.createElement('pre');
+            pre.textContent = JSON.stringify(data, null, 2);
+            resultsDiv.appendChild(pre);
+        }
+        
+        async function testConnection() {
+            resultsDiv.innerHTML = '';
+            log('🔄 Testing Enhanced API connection...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:5000/status');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                log('✅ Successfully connected to Enhanced API!', 'success');
+                logPre(data);
+                
+                if (data.custom_objects > 0) {
+                    log(`🏷️ Found ${data.custom_objects} custom labeled objects`, 'success');
+                } else {
+                    log('⚠️ No custom objects found. Run: python custom_labeling_system.py --mode label', 'error');
+                }
+                
+            } catch (error) {
+                log(`❌ Connection failed: ${error.message}`, 'error');
+                log('Make sure to run: python enhanced_api_with_custom_labels.py', 'info');
+            }
+        }
+        
+        async function testDetection() {
+            log('🔄 Testing detection endpoint...', 'info');
+            
+            try {
+                // Create a more realistic test image (larger with some objects)
+                const canvas = document.createElement('canvas');
+                canvas.width = 640;
+                canvas.height = 480;
+                const ctx = canvas.getContext('2d');
+                
+                // Create a background
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, 640, 480);
+                
+                // Draw some shapes that might look like objects
+                ctx.fillStyle = '#ff6b6b';
+                ctx.fillRect(100, 100, 80, 80);  // Red square
+                
+                ctx.fillStyle = '#4ecdc4';
+                ctx.beginPath();
+                ctx.arc(300, 200, 50, 0, 2 * Math.PI);
+                ctx.fill();  // Teal circle
+                
+                ctx.fillStyle = '#45b7d1';
+                ctx.fillRect(450, 150, 60, 120);  // Blue rectangle
+                
+                const imageData = canvas.toDataURL('image/jpeg', 0.8);
+                
+                const response = await fetch('http://localhost:5000/detect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        image: imageData
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                log('✅ Detection endpoint working!', 'success');
+                logPre(data);
+                
+                if (data.detections && data.detections.length > 0) {
+                    log(`🎯 Found ${data.detections.length} detections`, 'success');
+                } else {
+                    log('📭 No detections in test image (this is normal)', 'info');
+                }
+                
+            } catch (error) {
+                log(`❌ Detection test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function getCustomLabels() {
+            log('🔄 Getting custom labels...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:5000/custom-labels');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                log('✅ Custom labels retrieved!', 'success');
+                logPre(data);
+                
+                log(`📊 Summary: ${data.total} total, ${data.organic.length} organic, ${data.recyclable.length} recyclable`, 'info');
+                
+            } catch (error) {
+                log(`❌ Failed to get custom labels: ${error.message}`, 'error');
+            }
+        }
+        
+        // Auto-run connection test on load
+        window.onload = testConnection;
+    </script>
+</body>
+</html>
