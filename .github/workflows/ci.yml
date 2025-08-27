@@ -106,28 +106,45 @@ jobs:
         file: ./Dockerfile
         push: false
         tags: borlacam:test
+        load: true
         cache-from: type=gha
         cache-to: type=gha,mode=max
         
+    - name: Verify Docker image exists
+      run: docker images borlacam:test
+        
     - name: Test Docker container
       run: |
+        echo "Starting Docker container for health check..."
         docker run --rm -d --name borlacam-test -p 8001:8000 borlacam:test
-        sleep 30
-        # Test health endpoint with retry
-        for i in {1..5}; do
-          if curl -f http://localhost:8001/health; then
-            echo "Health check passed"
+        
+        echo "Waiting for container to start..."
+        sleep 45
+        
+        echo "Checking container status..."
+        docker ps -a | grep borlacam-test || true
+        
+        echo "Testing health endpoint with retry..."
+        for i in {1..6}; do
+          echo "Health check attempt $i of 6..."
+          if curl -f -s http://localhost:8001/health; then
+            echo "Health check passed!"
             break
           else
-            echo "Health check attempt $i failed, retrying..."
-            sleep 10
-          fi
-          if [ $i -eq 5 ]; then
-            echo "Health check failed after 5 attempts"
-            docker logs borlacam-test
-            exit 1
+            echo "Health check attempt $i failed"
+            if [ $i -eq 6 ]; then
+              echo "All health check attempts failed. Container logs:"
+              docker logs borlacam-test 2>&1 | tail -50
+              echo "Container status:"
+              docker ps -a | grep borlacam-test || true
+              docker stop borlacam-test || true
+              exit 1
+            fi
+            sleep 15
           fi
         done
+        
+        echo "Stopping test container..."
         docker stop borlacam-test
 
   security-scan:
